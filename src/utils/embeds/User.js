@@ -2,7 +2,12 @@
 
 import { EmbedBuilder } from 'discord.js';
 
-export const UserBuilder = (user, offline = false) => {
+export const UserBuilder = (user = null, offline = false) => {
+	if (!user || typeof user !== 'object') {
+		return new EmbedBuilder()
+			.setTitle(`Utilisateur inconnu`)
+			.setDescription(`une erreur est survenue et aucun utilisateur n'as pu être récupéré`)
+	}
 	const fields = [];
 
 	if (user.email) fields.push({
